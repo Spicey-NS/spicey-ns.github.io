@@ -28,7 +28,7 @@
     }  
     function meetsRequirements(userStats, requirements) {
       for (const stat in requirements) {
-        if (requirements[stat][1].toLowercase() == "less than")
+        if (requirements[stat][1].toLowerCase() == "less than")
           if ((userStats[stat] || 0) > requirements[stat]) return false;
         else
           if ((userStats[stat] || 0) < requirements[stat]) return false;
@@ -74,7 +74,6 @@
         const parsedReqs = match[2].matchAll(reqsRegex);
         const parsedReqsData = {};
         for (const match of parsedReqs) {
-          console.log(match);
           parsedReqsData[match[3]] = match;
         }
         const desc = match[3].replaceAll("&#37;", "%");
@@ -114,4 +113,5 @@
   </script>
 </body>
 </html>
+
 
