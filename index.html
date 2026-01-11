@@ -28,7 +28,10 @@
     }  
     function meetsRequirements(userStats, requirements) {
       for (const stat in requirements) {
-        if ((userStats[stat] || 0) < requirements[stat]) return false;
+        if (requirements[stat][1].toLowercase() == "less than")
+          if ((userStats[stat] || 0) > requirements[stat]) return false;
+        else
+          if ((userStats[stat] || 0) < requirements[stat]) return false;
       }
       return true;
     }
@@ -67,11 +70,12 @@
       for (const match of titleMatches) {
         const perkTitle = match[1];
         const reqs = match[2];
-        const reqsRegex = /([0-9]+)\s*((survival)|(presence)|(civilization)|(army)|(economy)|(luck)|(intelligence))/gi;
-        const parsedReqs = match[2].matchAll(reqsRegex)
+        const reqsRegex = /(less than)?\s*([0-9]+)\s*((?:survival)|(?:presence)|(?:civilization)|(?:army)|(?:economy)|(?:luck)|(?:intelligence))/gi;
+        const parsedReqs = match[2].matchAll(reqsRegex);
         const parsedReqsData = {};
         for (const match of parsedReqs) {
-          parsedReqsData[match[2]] = match[1]
+          console.log(match);
+          parsedReqsData[match[3]] = match;
         }
         const desc = match[3].replaceAll("&#37;", "%");
         
@@ -110,3 +114,4 @@
   </script>
 </body>
 </html>
+
