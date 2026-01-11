@@ -28,10 +28,13 @@
     }  
     function meetsRequirements(userStats, requirements) {
       for (const stat in requirements) {
-        if (requirements[stat][1]?.toLowerCase() == "less than")
-          if ((userStats[stat] || 0) > requirements[stat][2]) return false;
-        else
+        console.log(requirements[stat]);
+        if (requirements[stat][1]?.toLowerCase() == "less than") {
+          if ((userStats[stat] || 0) >= requirements[stat][2]) return false;
+        }
+        else {
           if ((userStats[stat] || 0) < requirements[stat][2]) return false;
+        }
       }
       return true;
     }
@@ -113,6 +116,7 @@
   </script>
 </body>
 </html>
+
 
 
 
